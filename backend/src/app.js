@@ -5,6 +5,10 @@ import dotenv from "dotenv";
 import { errorHandler, notFoundHandler } from "./middlewares/index.js";
 import logger from "./utils/logger.js";
 
+// Import routes
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+
 // Load environment variables
 dotenv.config();
 
@@ -43,17 +47,9 @@ app.get("/health", (req, res) => {
 // API Routes
 const API_VERSION = process.env.API_VERSION || "v1";
 
-// TODO: Import and use route files
-// import authRoutes from './routes/auth.routes.js';
-// import userRoutes from './routes/user.routes.js';
-// import productRoutes from './routes/product.routes.js';
-// import orderRoutes from './routes/order.routes.js';
-// ... etc
-
-// app.use(`/api/${API_VERSION}/auth`, authRoutes);
-// app.use(`/api/${API_VERSION}/users`, userRoutes);
-// app.use(`/api/${API_VERSION}/products`, productRoutes);
-// app.use(`/api/${API_VERSION}/orders`, orderRoutes);
+// Mount routes
+app.use(`/api/${API_VERSION}/auth`, authRoutes);
+app.use(`/api/${API_VERSION}/users`, userRoutes);
 
 // Welcome route
 app.get("/", (req, res) => {
